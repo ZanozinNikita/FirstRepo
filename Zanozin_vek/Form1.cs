@@ -15,5 +15,10 @@ namespace Zanozin_vek
         {
             InitializeComponent();
         }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.Text = Convert.ToString(e.X) + " " + Convert.ToString(e.Y);
+        }
     }
 }

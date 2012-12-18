@@ -31,6 +31,7 @@
             this.RCross = new System.Windows.Forms.RadioButton();
             this.RLine = new System.Windows.Forms.RadioButton();
             this.RCircle = new System.Windows.Forms.RadioButton();
+            this.Clear_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // RCross
@@ -69,11 +70,22 @@
             this.RCircle.UseVisualStyleBackColor = true;
             this.RCircle.CheckedChanged += new System.EventHandler(this.R_CheckedChanged);
             // 
+            // Clear_button
+            // 
+            this.Clear_button.Location = new System.Drawing.Point(321, 360);
+            this.Clear_button.Name = "Clear_button";
+            this.Clear_button.Size = new System.Drawing.Size(75, 23);
+            this.Clear_button.TabIndex = 3;
+            this.Clear_button.Text = "Clear";
+            this.Clear_button.UseVisualStyleBackColor = true;
+            this.Clear_button.Click += new System.EventHandler(this.Clear_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 395);
+            this.Controls.Add(this.Clear_button);
             this.Controls.Add(this.RCircle);
             this.Controls.Add(this.RLine);
             this.Controls.Add(this.RCross);
@@ -91,6 +103,7 @@
         private System.Windows.Forms.RadioButton RCross;
         private System.Windows.Forms.RadioButton RLine;
         private System.Windows.Forms.RadioButton RCircle;
+        private System.Windows.Forms.Button Clear_button;
     }
 }
 

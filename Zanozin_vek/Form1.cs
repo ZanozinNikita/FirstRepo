@@ -16,16 +16,22 @@ namespace Zanozin_vek
         List<Shape> Shapes = new List<Shape>();
         public bool isShapeStart = true;
         public Point ShapeStart = new Point();
+        public Pen pTemp = new Pen(Color.Gray);
+        public Shape tempShape;
         public Form1()
         {
             InitializeComponent();
+        }
+        private void AddShape(Shape shape)
+        {
+            Shapes.Add(shape);
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             this.Text = Convert.ToString(e.X) + " " + Convert.ToString(e.Y);
             if (RCross.Checked)
             {
-                Shapes.Add(new Cross(e.Location));
+                AddShape(tempShape);
                 isShapeStart = true;
                 Refresh();
             }
@@ -39,7 +45,7 @@ namespace Zanozin_vek
                 }
                 else
                 {
-                    Shapes.Add(new Line(ShapeStart,e.Location));
+                    AddShape(tempShape);
                     isShapeStart = true;
                     Refresh();
                 }
@@ -54,7 +60,7 @@ namespace Zanozin_vek
                 }
                 else
                 {
-                    Shapes.Add(new Circle(ShapeStart, e.Location));
+                    AddShape(tempShape);
                     isShapeStart = true;
                     Refresh();
                 }
@@ -66,6 +72,10 @@ namespace Zanozin_vek
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            if (tempShape != null)
+            {
+                tempShape.DrawWith(e.Graphics, pTemp);
+            }
             foreach (Shape p in this.Shapes)
             {
                 p.DrawWith(e.Graphics, pMain);
@@ -76,7 +86,38 @@ namespace Zanozin_vek
         {
             Shapes.Clear();
             isShapeStart = true;
+            tempShape = null;
             this.Refresh();
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Point TempPoint = new Point();
+            if (RCross.Checked)
+            {
+                tempShape = new Cross(e.Location);
+                this.Refresh();
+            }
+            else if (RLine.Checked)
+            {
+                if (isShapeStart != true)
+                {
+                    TempPoint.X = e.X;
+                    TempPoint.Y = e.Y;
+                    tempShape = new Line(ShapeStart, TempPoint);
+                    this.Refresh();
+                }
+            }
+            else if (RCircle.Checked)
+            {
+                if (isShapeStart != true)
+                {
+                    TempPoint.X = e.X;
+                    TempPoint.Y = e.Y;
+                    tempShape = new Circle(ShapeStart, TempPoint);
+                    this.Refresh();
+                }
+            }  
         }
     }
 }

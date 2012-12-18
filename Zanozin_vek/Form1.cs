@@ -10,10 +10,6 @@ using System.IO;
 
 namespace Zanozin_vek
 {
-    public abstract class Shape
-    {
-        public abstract void DrawWith(Graphics g, Pen pen);
-    }
     public partial class Form1 : Form
     {
         public Pen pMain = new Pen(Color.Black);
@@ -48,6 +44,25 @@ namespace Zanozin_vek
                     Refresh();
                 }
             }
+            if (RCircle.Checked)
+            {
+                if (isShapeStart == true)
+                {
+                    ShapeStart.X = e.X;
+                    ShapeStart.Y = e.Y;
+                    isShapeStart = false;
+                }
+                else
+                {
+                    Shapes.Add(new Circle(ShapeStart, e.Location));
+                    isShapeStart = true;
+                    Refresh();
+                }
+            }
+        }
+        private void R_CheckedChanged(object sender, EventArgs e)
+        {
+            isShapeStart = true;
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -82,6 +97,28 @@ namespace Zanozin_vek
         public override void DrawWith(Graphics g, Pen pen)
         {
             g.DrawLine(pen, this.S.X, this.S.Y, this.F.X, this.F.Y);
+        }
+    }
+    public abstract class Shape
+    {
+        public abstract void DrawWith(Graphics g, Pen pen);
+        public float Dist(Point A, Point B)
+        {
+            return ((float)Math.Sqrt(Math.Pow((B.X - A.X), 2) + Math.Pow((B.Y - A.Y), 2)));
+        }
+    }
+    public class Circle : Shape
+    {
+        Point C;
+        Point R;
+        public Circle(Point _C, Point _R)
+        {
+            C = _C;
+            R = _R;
+        }
+        public override void DrawWith(Graphics g, Pen pen)
+        {
+            g.DrawEllipse(pen, C.X - Dist(C, R), C.Y - Dist(C, R), Dist(C, R) * 2, Dist(C, R) * 2);
         }
     }
 }

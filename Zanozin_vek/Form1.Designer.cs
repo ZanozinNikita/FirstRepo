@@ -30,6 +30,7 @@
         {
             this.RCross = new System.Windows.Forms.RadioButton();
             this.RLine = new System.Windows.Forms.RadioButton();
+            this.RCircle = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // RCross
@@ -42,6 +43,7 @@
             this.RCross.TabStop = true;
             this.RCross.Text = "RCross";
             this.RCross.UseVisualStyleBackColor = true;
+            this.RCross.CheckedChanged += new System.EventHandler(this.R_CheckedChanged);
             // 
             // RLine
             // 
@@ -53,12 +55,26 @@
             this.RLine.TabStop = true;
             this.RLine.Text = "RLine";
             this.RLine.UseVisualStyleBackColor = true;
+            this.RLine.CheckedChanged += new System.EventHandler(this.R_CheckedChanged);
+            // 
+            // RCircle
+            // 
+            this.RCircle.AutoSize = true;
+            this.RCircle.Location = new System.Drawing.Point(402, 374);
+            this.RCircle.Name = "RCircle";
+            this.RCircle.Size = new System.Drawing.Size(59, 17);
+            this.RCircle.TabIndex = 2;
+            this.RCircle.TabStop = true;
+            this.RCircle.Text = "RCircle";
+            this.RCircle.UseVisualStyleBackColor = true;
+            this.RCircle.CheckedChanged += new System.EventHandler(this.R_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 385);
+            this.ClientSize = new System.Drawing.Size(499, 395);
+            this.Controls.Add(this.RCircle);
             this.Controls.Add(this.RLine);
             this.Controls.Add(this.RCross);
             this.Name = "Form1";
@@ -74,6 +90,7 @@
 
         private System.Windows.Forms.RadioButton RCross;
         private System.Windows.Forms.RadioButton RLine;
+        private System.Windows.Forms.RadioButton RCircle;
     }
 }
 

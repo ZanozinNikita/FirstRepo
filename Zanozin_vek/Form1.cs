@@ -13,6 +13,7 @@ namespace Zanozin_vek
     public partial class Form1 : Form
     {
         public Pen pMain = new Pen(Color.Black);
+        public string curFile = "text.txt";
         List<Shape> Shapes = new List<Shape>();
         public bool isShapeStart = true;
         public Point ShapeStart = new Point();
@@ -118,6 +119,63 @@ namespace Zanozin_vek
                     this.Refresh();
                 }
             }  
+        }
+
+        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                curFile = openFileDialog1.FileName;
+                Shapes.Clear();
+                isShapeStart = true;
+                this.Refresh();
+                StreamReader sr = new StreamReader(curFile);
+                while (!sr.EndOfStream)
+                {
+                    string type = sr.ReadLine();
+                    switch (type)
+                    {
+                        case "Cross":
+                            {
+                                Shapes.Add(new Cross(sr));
+                                this.Refresh();
+                                break;
+                            }
+                        case "Line":
+                            {
+                                Shapes.Add(new Line(sr));
+                                this.Refresh();
+                                break;
+                            }
+                        case "Circle":
+                            {
+                                Shapes.Add(new Circle(sr));
+                                this.Refresh();
+                                break;
+                            }
+                        case "":
+                            {
+                                this.Refresh();
+                                break;
+                            }
+                    }
+                }
+                sr.Close();
+            }
+        }
+
+        private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                curFile = saveFileDialog1.FileName;
+                StreamWriter sw = new StreamWriter(curFile);
+                foreach (Shape p in this.Shapes)
+                {
+                    p.SaveTo(sw);
+                }
+                sw.Close();
+            }
         }
     }
 }

@@ -29,45 +29,58 @@ namespace Zanozin_vek
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            this.Text = Convert.ToString(e.X) + " " + Convert.ToString(e.Y);
-            if (RCross.Checked)
+            if (e.Button == MouseButtons.Right)
             {
-                AddShape(tempShape);
-                isShapeStart = true;
-                ShapesList.Items.Add("Cross" + Convert.ToString(e.Location));
+                int q = 0;
+                foreach (Shape i in Shapes)
+                {
+                    if (i.IsNearTo(e.Location))
+                    {
+                        ShapesList.SetSelected(q, true);
+                    }
+                    q++;
+                }
+            }
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Text = Convert.ToString(e.X) + " " + Convert.ToString(e.Y);
+                if (RCross.Checked)
+                {
+                    AddShape(tempShape);
+                    isShapeStart = true;
+                    ShapesList.Items.Add("Cross" + Convert.ToString(e.Location));
+                }
+                if (RLine.Checked)
+                {
+                    if (isShapeStart == true)
+                    {
+                        ShapeStart.X = e.X;
+                        ShapeStart.Y = e.Y;
+                        isShapeStart = false;
+                    }
+                    else
+                    {
+                        AddShape(tempShape);
+                        isShapeStart = true;
+                        ShapesList.Items.Add("Line" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
+                    }
+                }
+                if (RCircle.Checked)
+                {
+                    if (isShapeStart == true)
+                    {
+                        ShapeStart.X = e.X;
+                        ShapeStart.Y = e.Y;
+                        isShapeStart = false;
+                    }
+                    else
+                    {
+                        AddShape(tempShape);
+                        isShapeStart = true;
+                        ShapesList.Items.Add("Circle" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
+                    }
+                }
                 Refresh();
-            }
-            if (RLine.Checked)
-            {
-                if (isShapeStart == true)
-                {
-                    ShapeStart.X = e.X;
-                    ShapeStart.Y = e.Y;
-                    isShapeStart = false;
-                }
-                else
-                {
-                    AddShape(tempShape);
-                    isShapeStart = true;
-                    ShapesList.Items.Add("Line" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
-                    Refresh();
-                }
-            }
-            if (RCircle.Checked)
-            {
-                if (isShapeStart == true)
-                {
-                    ShapeStart.X = e.X;
-                    ShapeStart.Y = e.Y;
-                    isShapeStart = false;
-                }
-                else
-                {
-                    AddShape(tempShape);
-                    isShapeStart = true;
-                    ShapesList.Items.Add("Circle" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
-                    Refresh();
-                }
             }
         }
         private void R_CheckedChanged(object sender, EventArgs e)

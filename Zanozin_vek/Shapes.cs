@@ -14,6 +14,7 @@ namespace Zanozin_vek
     {
         public abstract void DrawWith(Graphics g, Pen pen);
         public abstract void SaveTo(StreamWriter sw);
+        public abstract bool IsNearTo(Point A);
         public float Dist(Point A, Point B)
         {
             return ((float)Math.Sqrt(Math.Pow((B.X - A.X), 2) + Math.Pow((B.Y - A.Y), 2)));
@@ -42,6 +43,10 @@ namespace Zanozin_vek
         {
             g.DrawLine(pen, F.X - 2, F.Y - 2, F.X + 2, F.Y + 2);
             g.DrawLine(pen, F.X + 2, F.Y - 2, F.X - 2, F.Y + 2);
+        }
+        public override bool IsNearTo(Point A)
+        {
+            return (Dist(A, F) <= 1);
         }
     }
     public class Line : Shape
@@ -75,6 +80,10 @@ namespace Zanozin_vek
         {
             g.DrawLine(pen, this.S.X, this.S.Y, this.F.X, this.F.Y);
         }
+        public override bool IsNearTo(Point A)
+        {
+            return (((Dist(S, A) + Dist(F, A)) - Dist(S, F)) <= 1);
+        }
     }
     public class Circle : Shape
     {
@@ -106,6 +115,10 @@ namespace Zanozin_vek
         public override void DrawWith(Graphics g, Pen pen)
         {
             g.DrawEllipse(pen, C.X - Dist(C, R), C.Y - Dist(C, R), Dist(C, R) * 2, Dist(C, R) * 2);
+        }
+        public override bool IsNearTo(Point A)
+        {
+            return ((Dist(C, A) - Dist(C, R)) <= 1);
         }
     }
 }

@@ -26,15 +26,16 @@ namespace Zanozin_vek
         private void AddShape(Shape shape)
         {
             Shapes.Add(shape);
+            ShapesList.Items.Add(shape.AddToList());
         }
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
                 int q = 0;
-                foreach (Shape i in Shapes)
+                foreach (Shape shape in Shapes)
                 {
-                    if (i.IsNearTo(e.Location))
+                    if (shape.IsNearTo(e.Location))
                     {
                         ShapesList.SetSelected(q, true);
                     }
@@ -48,36 +49,31 @@ namespace Zanozin_vek
                 {
                     AddShape(tempShape);
                     isShapeStart = true;
-                    ShapesList.Items.Add("Cross" + Convert.ToString(e.Location));
                 }
                 if (RLine.Checked)
                 {
                     if (isShapeStart == true)
                     {
-                        ShapeStart.X = e.X;
-                        ShapeStart.Y = e.Y;
+                        ShapeStart = e.Location;
                         isShapeStart = false;
                     }
                     else
                     {
                         AddShape(tempShape);
                         isShapeStart = true;
-                        ShapesList.Items.Add("Line" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
                     }
                 }
                 if (RCircle.Checked)
                 {
                     if (isShapeStart == true)
                     {
-                        ShapeStart.X = e.X;
-                        ShapeStart.Y = e.Y;
+                        ShapeStart = e.Location;
                         isShapeStart = false;
                     }
                     else
                     {
                         AddShape(tempShape);
                         isShapeStart = true;
-                        ShapesList.Items.Add("Circle" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
                     }
                 }
                 Refresh();
@@ -120,8 +116,7 @@ namespace Zanozin_vek
             {
                 if (isShapeStart != true)
                 {
-                    TempPoint.X = e.X;
-                    TempPoint.Y = e.Y;
+                    TempPoint = e.Location;
                     tempShape = new Line(ShapeStart, TempPoint);
                     this.Refresh();
                 }
@@ -130,8 +125,7 @@ namespace Zanozin_vek
             {
                 if (isShapeStart != true)
                 {
-                    TempPoint.X = e.X;
-                    TempPoint.Y = e.Y;
+                    TempPoint = e.Location;
                     tempShape = new Circle(ShapeStart, TempPoint);
                     this.Refresh();
                 }
@@ -201,6 +195,8 @@ namespace Zanozin_vek
             {
                 Shapes.RemoveAt(ShapesList.SelectedIndices[0]);
                 ShapesList.Items.RemoveAt(ShapesList.SelectedIndices[0]);
+                isShapeStart = true;
+                tempShape = null;
             }
             Refresh();  
         }

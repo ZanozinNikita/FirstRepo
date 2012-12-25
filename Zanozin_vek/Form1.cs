@@ -34,6 +34,7 @@ namespace Zanozin_vek
             {
                 AddShape(tempShape);
                 isShapeStart = true;
+                ShapesList.Items.Add("Cross" + Convert.ToString(e.Location));
                 Refresh();
             }
             if (RLine.Checked)
@@ -48,6 +49,7 @@ namespace Zanozin_vek
                 {
                     AddShape(tempShape);
                     isShapeStart = true;
+                    ShapesList.Items.Add("Line" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
                     Refresh();
                 }
             }
@@ -63,6 +65,7 @@ namespace Zanozin_vek
                 {
                     AddShape(tempShape);
                     isShapeStart = true;
+                    ShapesList.Items.Add("Circle" + Convert.ToString(ShapeStart) + Convert.ToString(e.Location));
                     Refresh();
                 }
             }
@@ -87,6 +90,7 @@ namespace Zanozin_vek
         {
             Shapes.Clear();
             isShapeStart = true;
+            ShapesList.Items.Clear();
             tempShape = null;
             this.Refresh();
         }
@@ -176,6 +180,16 @@ namespace Zanozin_vek
                 }
                 sw.Close();
             }
+        }
+
+        private void delete_item_Click(object sender, EventArgs e)
+        {
+            while (ShapesList.SelectedIndices.Count > 0)
+            {
+                Shapes.RemoveAt(ShapesList.SelectedIndices[0]);
+                ShapesList.Items.RemoveAt(ShapesList.SelectedIndices[0]);
+            }
+            Refresh();  
         }
     }
 }

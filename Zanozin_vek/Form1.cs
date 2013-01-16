@@ -142,34 +142,30 @@ namespace Zanozin_vek
                         case "Cross":
                             {
                                 AddShape(new Cross(sr));
-                                this.Refresh();
                                 break;
                             }
                         case "Line":
                             {
                                 AddShape(new Line(sr));
-                                this.Refresh();
                                 break;
                             }
                         case "Circle":
                             {
                                 AddShape(new Circle(sr));
-                                this.Refresh();
                                 break;
                             }
                         case "Rectangle":
                             {
                                 AddShape(new Rec(sr));
-                                this.Refresh();
                                 break;
                             }
                         case "":
                             {
-                                this.Refresh();
                                 break;
                             }
                     }
                 }
+                this.Refresh();
                 sr.Close();
             }
         }

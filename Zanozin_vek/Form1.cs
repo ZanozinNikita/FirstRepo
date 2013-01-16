@@ -13,7 +13,7 @@ namespace Zanozin_vek
     public partial class Form1 : Form
     {
         public Pen pMain = new Pen(Color.Black);
-        public string curFile = "text.txt";
+        public string curFile;
         List<Shape> Shapes = new List<Shape>();
         public bool isShapeStart = true;
         public Point ShapeStart = new Point();
@@ -94,7 +94,6 @@ namespace Zanozin_vek
                 p.DrawWith(e.Graphics, pMain);
             }
         }
-
         private void Clear_button_Click(object sender, EventArgs e)
         {
             Shapes.Clear();
@@ -103,7 +102,6 @@ namespace Zanozin_vek
             tempShape = null;
             this.Refresh();
         }
-
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
             Point TempPoint = new Point();
@@ -131,7 +129,6 @@ namespace Zanozin_vek
                 }
             }  
         }
-
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -148,19 +145,19 @@ namespace Zanozin_vek
                     {
                         case "Cross":
                             {
-                                Shapes.Add(new Cross(sr));
+                                AddShape(new Cross(sr));
                                 this.Refresh();
                                 break;
                             }
                         case "Line":
                             {
-                                Shapes.Add(new Line(sr));
+                                AddShape(new Line(sr));
                                 this.Refresh();
                                 break;
                             }
                         case "Circle":
                             {
-                                Shapes.Add(new Circle(sr));
+                                AddShape(new Circle(sr));
                                 this.Refresh();
                                 break;
                             }
@@ -174,7 +171,6 @@ namespace Zanozin_vek
                 sr.Close();
             }
         }
-
         private void сохранитькакToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
@@ -188,7 +184,6 @@ namespace Zanozin_vek
                 sw.Close();
             }
         }
-
         private void delete_item_Click(object sender, EventArgs e)
         {
             while (ShapesList.SelectedIndices.Count > 0)

@@ -50,20 +50,7 @@ namespace Zanozin_vek
                     AddShape(tempShape);
                     isShapeStart = true;
                 }
-                if (RLine.Checked)
-                {
-                    if (isShapeStart == true)
-                    {
-                        ShapeStart = e.Location;
-                        isShapeStart = false;
-                    }
-                    else
-                    {
-                        AddShape(tempShape);
-                        isShapeStart = true;
-                    }
-                }
-                if (RCircle.Checked)
+                else 
                 {
                     if (isShapeStart == true)
                     {

@@ -114,7 +114,16 @@ namespace Zanozin_vek
                     tempShape = new Circle(ShapeStart, TempPoint);
                     this.Refresh();
                 }
-            }  
+            }
+            else if (RRectangle.Checked)
+            {
+                if (isShapeStart != true)
+                {
+                    TempPoint = e.Location;
+                    tempShape = new Rec(ShapeStart, TempPoint);
+                    this.Refresh();
+                }
+            } 
         }
         private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -145,6 +154,12 @@ namespace Zanozin_vek
                         case "Circle":
                             {
                                 AddShape(new Circle(sr));
+                                this.Refresh();
+                                break;
+                            }
+                        case "Rectangle":
+                            {
+                                AddShape(new Rec(sr));
                                 this.Refresh();
                                 break;
                             }

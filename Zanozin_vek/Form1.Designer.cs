@@ -67,6 +67,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.ShapesList = new System.Windows.Forms.ListBox();
             this.delete_item = new System.Windows.Forms.Button();
+            this.RRectangle = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -362,7 +363,7 @@
             this.ShapesList.FormattingEnabled = true;
             this.ShapesList.Location = new System.Drawing.Point(0, 27);
             this.ShapesList.Name = "ShapesList";
-            this.ShapesList.Size = new System.Drawing.Size(115, 368);
+            this.ShapesList.Size = new System.Drawing.Size(234, 368);
             this.ShapesList.TabIndex = 5;
             // 
             // delete_item
@@ -375,11 +376,24 @@
             this.delete_item.UseVisualStyleBackColor = true;
             this.delete_item.Click += new System.EventHandler(this.delete_item_Click);
             // 
+            // RRectangle
+            // 
+            this.RRectangle.AutoSize = true;
+            this.RRectangle.Location = new System.Drawing.Point(402, 303);
+            this.RRectangle.Name = "RRectangle";
+            this.RRectangle.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.RRectangle.Size = new System.Drawing.Size(82, 17);
+            this.RRectangle.TabIndex = 7;
+            this.RRectangle.TabStop = true;
+            this.RRectangle.Text = "RRectangle";
+            this.RRectangle.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 395);
+            this.Controls.Add(this.RRectangle);
             this.Controls.Add(this.delete_item);
             this.Controls.Add(this.ShapesList);
             this.Controls.Add(this.Clear_button);
@@ -440,6 +454,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.ListBox ShapesList;
         private System.Windows.Forms.Button delete_item;
+        private System.Windows.Forms.RadioButton RRectangle;
     }
 }
 

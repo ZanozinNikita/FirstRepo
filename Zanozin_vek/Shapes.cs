@@ -134,4 +134,46 @@ namespace Zanozin_vek
             return ("Circle" + Convert.ToString(C) + Convert.ToString(R));
         }
     }
+    public class Rec : Shape
+    {
+        Point S;
+        Point F;
+        public Rec(Point _S, Point _F)
+        {
+            this.S.X = Math.Min(_S.X,_F.X);
+            this.S.Y = Math.Min(_S.Y,_F.Y);
+            this.F.X = Math.Max(_S.X, _F.X);
+            this.F.Y = Math.Max(_S.Y, _F.Y);
+        }
+        public Rec(StreamReader sr)
+        {
+            string line1, line2;
+            line1 = sr.ReadLine();
+            line2 = sr.ReadLine();
+            string[] coords1 = line1.Split(' ');
+            string[] coords2 = line2.Split(' ');
+            S.X = Convert.ToInt32(coords1[0]);
+            S.Y = Convert.ToInt32(coords1[1]);
+            F.X = Convert.ToInt32(coords2[0]);
+            F.Y = Convert.ToInt32(coords2[1]);
+        }
+        public override void SaveTo(StreamWriter sw)
+        {
+            sw.WriteLine("Rectangle");
+            sw.WriteLine(Convert.ToString(S.X) + " " + Convert.ToString(S.Y));
+            sw.WriteLine(Convert.ToString(F.X) + " " + Convert.ToString(F.Y));
+        }
+        public override void DrawWith(Graphics g, Pen pen)
+        {
+            g.DrawRectangle(pen,S.X,S.Y,F.X-S.X,F.Y-S.Y);
+        }
+        public override string AddToList()
+        {
+            return ("Rectangle" + Convert.ToString(S) + Convert.ToString(F));
+        }
+        public override bool IsNearTo(Point A)
+        {
+            return (false);
+        }
+    }
 }
